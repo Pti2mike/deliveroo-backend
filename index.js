@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors"); // autorise les accès au serveur
 const app = express();
 app.use(cors());
+require("dotenv").config();
 
 app.get("/", (req, res) => {
   return res.json({
@@ -450,16 +451,12 @@ app.get("/", (req, res) => {
   });
 });
 // Heroku va nous fournir une variable process.env.PORT
-// if (process.env.PORT) {
-//   app.listen(process.env.PORT, () => {
-//     console.log("Server started");
-//   });
-// } else {
-//   app.listen(3200, () => {
-//     console.log("Server started");
-//   });
-// }
-
-app.listen(process.env.PORT || 3001, () => {
-  console.log("Server Started");
-});
+if (process.env.PORT) {
+  app.listen(process.env.PORT, () => {
+    console.log("Server started");
+  });
+} else {
+  app.listen(3200, () => {
+    console.log("Server started");
+  });
+}
